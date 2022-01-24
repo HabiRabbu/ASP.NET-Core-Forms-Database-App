@@ -1,0 +1,35 @@
+BEGIN TRANSACTION;
+
+CREATE TABLE Category (
+
+    Id INTEGER NOT NULL CONSTRAINT PK_Category PRIMARY KEY,
+    Title VARCHAR(max) NOT NULL
+
+);
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE Users (
+
+    Id INTEGER NOT NULL CONSTRAINT PK_Users PRIMARY KEY,
+    Username VARCHAR(max) NOT NULL,
+    Password VARCHAR(max) NOT NULL,
+    AccessLevel VARCHAR(max) NOT NULL
+);
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE Forms (
+
+    Id INTEGER NOT NULL CONSTRAINT PK_Forms PRIMARY KEY,
+    Title VARCHAR(max) NOT NULL,
+    CategoryId INTEGER NOT NULL,
+    [Date] DATE NOT NULL,
+    [Time] TIME NOT NULL,
+    Details VARCHAR(max) NOT NULL,
+    InformationVerified INTEGER NOT NULL,
+    DateCreated VARCHAR(max) NOT NULL,
+    TimeCreated VARCHAR(max) NOT NULL,
+
+    CONSTRAINT FK_Forms_Category_CategoryId FOREIGN KEY (CategoryId) REFERENCES Category (Id) ON DELETE CASCADE
+
+);
+
+CREATE INDEX IX_Forms_CategoryId ON Forms (CategoryId);
+COMMIT;
